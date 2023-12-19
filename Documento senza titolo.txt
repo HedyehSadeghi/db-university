@@ -1,0 +1,81 @@
+﻿CREATE DATABASE `db_university_schema`;
+USE `db_university_schema`;
+
+
+CREATE TABLE `departments`(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR (100) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    phone CHAR(10) NOT NULL,
+    email VARCHAR (150) NOT NULL,
+    website VARCHAR(255) NOT NULL,
+    head_of_department VARCHAR(150),
+    PRIMARY KEY(id)
+);
+
+
+CREATE table `degrees`(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    `level` TINYINT NOT NULL,
+    address VARCHAR (255),
+    email VARCHAR (255) NOT NULL,
+    website VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+
+ALTER TABLE `degrees`
+ADD COLUMN department_id INT NOT NULL;
+
+
+ALTER TABLE `degrees`
+ADD FOREIGN KEY (department_id) REFERENCES `departments`(id);
+
+
+CREATE table `students`(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    surname VARCHAR(200) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    fiscal_code CHAR (20) NOT NULL,
+    enrollment_date DATE NOT NULL,
+    registration_number VARCHAR(100) NOT NULL,
+    email VARCHAR (255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+
+ALTER TABLE `students`
+ADD COLUMN `degree_id` INT;
+
+
+ALTER TABLE `students`
+ADD FOREIGN KEY (`degree_id`) REFERENCES `degrees` (id);
+
+
+
+
+
+
+INSERT INTO db_university_schema.departments
+(id, name, address, phone, email, website, head_of_department)
+VALUES(0,'science', 'viwsfdjokws', '1234567890', 'science@gmail.com', 'adchksc.it', 'Adam');
+
+
+
+
+
+
+INSERT INTO db_university_schema.degrees
+(id, name, `level`, address, email, website, department_id)
+VALUES(1, 'math degree', 1, 'wfkjdwj', 'ofie', 'fwljik.com', 0);
+
+
+
+
+
+
+INSERT INTO db_university_schema.students
+(name, surname, date_of_birth, fiscal_code, enrollment_date, registration_number, email, degree_id)
+VALUES('pinco', 'pallo', '1999-01-01', 'qwertyuiop', '2023-09-10', '12345', 'pinco@gmail.com', 1);
